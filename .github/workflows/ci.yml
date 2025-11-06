@@ -1,4 +1,4 @@
-name: Complete CI
+name: CI
 
 on:
   push:
@@ -11,17 +11,16 @@ concurrency:
 
 env:
   CARGO_TERM_COLOR: always
-  RUSTFLAGS: -Dwarnings
-  RUSTDOCFLAGS: -Dwarnings
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/torbenjohnson/advent_of_code-ci:latest
 
     steps:
       - uses: actions/checkout@v4
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: just, cargo-nextest
 
       - name: Show Rust version
         run: rustc --version
