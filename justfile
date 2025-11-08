@@ -6,7 +6,7 @@ _default:
 
 # Run the CI in this directory
 ci:
-    just _fmt-ci _lint-ci _doc-ci _build-ci _test-ci
+    just _fmt-ci _lint-ci _doc-ci _test-ci
 
 # Clean all temporary files
 clean:
@@ -15,10 +15,6 @@ clean:
 # Build the default binary of this crate
 build:
     cargo build
-
-# Build with warnings as errors in CI
-_build-ci:
-    RUSTFLAGS="-D warnings" cargo build --profile {{ PROFILE_CI }}
 
 # Run the default binary of this crate
 run:
@@ -40,7 +36,7 @@ lint:
 
 # Run the linter for all files in CI
 _lint-ci:
-    RUSTFLAGS="-D warnings" cargo clippy --profile {{ PROFILE_CI }} -- --no-deps
+    RUSTFLAGS="-D warnings" cargo clippy --all-targets --all-features --profile {{ PROFILE_CI }} -- --no-deps
 
 # Run all tests
 test:
@@ -48,7 +44,7 @@ test:
 
 # Run all tests in CI
 _test-ci:
-    RUSTFLAGS="-D warnings" cargo nextest run --cargo-profile {{ PROFILE_CI }}
+    RUSTFLAGS="-D warnings" cargo nextest run --all-targets --all-features --cargo-profile {{ PROFILE_CI }}
 
 # Build this package's documentation
 doc:
