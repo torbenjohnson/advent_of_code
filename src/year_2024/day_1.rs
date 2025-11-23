@@ -18,10 +18,10 @@ fn calculate_lists_distance(mut list_1: Vec<u32>, mut list_2: Vec<u32>) -> u32 {
 #[must_use]
 pub fn solve_part_2(input: &str) -> u32 {
     let (list_1, list_2) = parse_input_to_lists(input);
-    calculate_lists_similarity(list_1, list_2)
+    calculate_lists_similarity(&list_1, &list_2)
 }
 
-fn calculate_lists_similarity(list_1: Vec<u32>, list_2: Vec<u32>) -> u32 {
+fn calculate_lists_similarity(list_1: &[u32], list_2: &[u32]) -> u32 {
     let result: u32 = list_1
         .iter()
         .map(|element_1| {
@@ -67,21 +67,21 @@ mod tests {
     fn given_input_when_solve_part_1_then() {
         let result = solve_part_1(INPUT);
 
-        assert_eq!(result, 1834060)
+        assert_eq!(result, 1_834_060);
     }
 
     #[test]
     fn given_input_when_solve_part_2_then() {
         let result = solve_part_2(INPUT);
 
-        assert_eq!(result, 21607792);
+        assert_eq!(result, 21_607_792);
     }
 
     #[test]
     fn given_lists_when_calculate_similarity_when_calculate_lists_distance_then_correct_output() {
         let (list_1, list_2) = given_lists();
 
-        let result = calculate_lists_similarity(list_1, list_2);
+        let result = calculate_lists_similarity(&list_1, &list_2);
 
         assert_eq!(result, 31);
     }
