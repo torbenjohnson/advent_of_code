@@ -18,5 +18,6 @@ name    = "day_1"
 
 [profile.ci]
 incremental     = false
+debug           = false
 inherits        = "dev"
 overflow-checks = true
