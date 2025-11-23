@@ -16,6 +16,9 @@ divan = "0.1.21"
 harness = false
 name    = "day_1"
 
+[profile.dev]
+debug = false  # Disable debug symbols to speed up compilation
+
 [profile.ci]
 incremental     = false
 debug           = false
