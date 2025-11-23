@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.head_ref || github.run_id }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 env:
@@ -18,12 +18,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: taiki-e/install-action@v2
-        with:
-          tool: just, cargo-nextest
 
-      - name: Show Rust version
-        run: rustc --version
+      - name: Install Rust toolchain
+        run: rustup toolchain install
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: Install tools
+        uses: taiki-e/install-action@v2
+        with:
+          tool: just,cargo-nextest
+
+      - uses: davidlattimore/wild-action@0.7.0
 
       - name: Run just ci
         run: just ci
