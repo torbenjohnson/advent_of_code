@@ -1,3 +1,4 @@
+#[must_use]
 pub fn solve_part_1(input: &str) -> u32 {
     let (list_1, list_2) = parse_input_to_lists(input);
     calculate_lists_distance(list_1, list_2)
@@ -14,6 +15,7 @@ fn calculate_lists_distance(mut list_1: Vec<u32>, mut list_2: Vec<u32>) -> u32 {
         .sum()
 }
 
+#[must_use]
 pub fn solve_part_2(input: &str) -> u32 {
     let (list_1, list_2) = parse_input_to_lists(input);
     calculate_lists_similarity(list_1, list_2)
