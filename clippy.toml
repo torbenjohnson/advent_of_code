@@ -1,0 +1,11 @@
+# This file allows configuration of specific clippy lints
+# docs: https://doc.rust-lang.org/stable/clippy/configuration.html
+
+allow-expect-in-tests = true
+allow-unwrap-in-tests = true
+excessive-nesting-threshold = 5
+doc-valid-idents = []
+# https://rust-lang.github.io/rust-clippy/master/index.html#/disallowed_methods
+disallowed-methods = []
+# https://rust-lang.github.io/rust-clippy/master/index.html#missing_enforced_import_renames
+enforced-import-renames = []
