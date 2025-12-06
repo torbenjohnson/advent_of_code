@@ -1,3 +1,8 @@
+#![allow(
+    unused_must_use,
+    reason = "benchmark functions don't need to use return values"
+)]
+
 use advent_of_code::{solve_part_1, solve_part_2};
 
 const INPUT: &str = include_str!("../inputs/2024/day1.txt");
