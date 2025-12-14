@@ -1,17 +1,17 @@
 [package]
-name = "advent_of_code"
+name    = "advent_of_code"
 version = "0.1.0"
 edition = "2024"
 
 [[bench]]
 harness = false
-name = "day_1"
+name    = "day_1"
 
 [dependencies]
 displaydoc = "0.2.5"
-itertools = "0.14.0"
-rayon = "1.11.0"
-thiserror = "2.0.16"
+itertools  = "0.14.0"
+rayon      = "1.11.0"
+thiserror  = "2.0.16"
 
 [dev-dependencies]
 divan = "0.1.21"
@@ -25,49 +25,54 @@ divan = "0.1.21"
 # Thanks Jacob for the lints
 
 [lints.clippy]
-# Single lints
-alloc_instead_of_core = "allow"  # alloc is better than std
-arbitrary_source_item_ordering = "allow"  # Do not enforce an ordering
-arithmetic_side_effects = "allow"  # Do not enforce overflow considerations
+alloc_instead_of_core            = "allow"  # alloc is better than std
+arbitrary_source_item_ordering   = "allow"  # Do not enforce an ordering
+arithmetic_side_effects          = "allow"  # Do not enforce overflow considerations
 blanket_clippy_restriction_lints = "allow"  # Allow using "restriction group" with global warnings
-cargo = { level = "warn", priority = -1 }
-cargo_common_metadata = "allow"
-cfg_not_test = "allow"
-clone_on_ref_ptr = "allow"  # Cloning with "x.clone()" is ok
-default_numeric_fallback = "allow"  # Do not enforce numeric types to be named
-else_if_without_else = "allow"  # Do not enforce the write of empty "else" statement for if expressions
-exhaustive_enums = "allow"  # Some enums are truly exhaustive
-exhaustive_structs = "allow"  # Most structs are truly exhaustive
-float_arithmetic = "allow"  # Do not disallow float arithmetic
-implicit_return = "allow"  # Do not force writing the "return" keyword
-inline_asm_x86_intel_syntax = "allow"  # Enforce x86 Intel syntax assembly instead of AT&T
-integer_division_remainder_used = "allow"
-min_ident_chars = "allow"  # Allow single char variable names
-missing_docs_in_private_items = "allow"  # Do not enforce documentation on private items
-missing_inline_in_public_items = "allow"  # Allow public functions not to be inlined
-missing_trait_methods = "allow"  # Do not enforce writing default implemented functions
-module_name_repetitions = "allow"  # Do not enforce module name styling
-multiple_crate_versions = "allow"
-nursery = { level = "warn", priority = -1 }
-pedantic = { level = "warn", priority = -1 }
-pub_use = "allow"
-pub_with_shorthand = "allow"  # Enforce not using "pub(in crate)"
-question_mark_used = "allow"  # Allow the use of the question mark operator
-restriction = { level = "warn", priority = -1 }
-self_named_module_files = "allow"  # Enforce not using "mod.rs"
-separated_literal_suffix = "allow"  # Enforce unseparated literal suffixes instead of separated
-similar_names = "allow"  # Do not enforce variable name styling
-single_call_fn = "allow"  # Separating concerns is preferred to centralizing behavior
-std_instead_of_alloc = "allow"  # alloc is better than std
+cargo                            = { level = "warn", priority = -1 }
+cargo_common_metadata            = "allow"
+cfg_not_test                     = "allow"
+clone_on_ref_ptr                 = "allow"  # Cloning with "x.clone()" is ok
+default_numeric_fallback         = "allow"  # Do not enforce numeric types to be named
+else_if_without_else             = "allow"  # Do not enforce the write of empty "else" statement for if expressions
+exhaustive_enums                 = "allow"  # Some enums are truly exhaustive
+exhaustive_structs               = "allow"  # Most structs are truly exhaustive
+float_arithmetic                 = "allow"  # Do not disallow float arithmetic
+implicit_return                  = "allow"  # Do not force writing the "return" keyword
+inline_asm_x86_intel_syntax      = "allow"  # Enforce x86 Intel syntax assembly instead of AT&T
+integer_division_remainder_used  = "allow"
+min_ident_chars                  = "allow"  # Allow single char variable names
+missing_docs_in_private_items    = "allow"  # Do not enforce documentation on private items
+missing_inline_in_public_items   = "allow"  # Allow public functions not to be inlined
+missing_trait_methods            = "allow"  # Do not enforce writing default implemented functions
+module_name_repetitions          = "allow"  # Do not enforce module name styling
+multiple_crate_versions          = "allow"
+nursery                          = { level = "warn", priority = -1 }
+pedantic                         = { level = "warn", priority = -1 }
+pub_use                          = "allow"
+pub_with_shorthand               = "allow"  # Enforce not using "pub(in crate)"
+question_mark_used               = "allow"  # Allow the use of the question mark operator
+restriction                      = { level = "warn", priority = -1 }
+self_named_module_files          = "allow"  # Enforce not using "mod.rs"
+separated_literal_suffix         = "allow"  # Enforce unseparated literal suffixes instead of separated
+similar_names                    = "allow"  # Do not enforce variable name styling
+single_call_fn                   = "allow"  # Separating concerns is preferred to centralizing behavior
+std_instead_of_alloc             = "allow"  # alloc is better than std
 
 [lints.rust]
-# missing_docs = "warn" # Groups
+# missing_docs = "warn"
 
 [profile.dev]
-debug = false  # Disable debug symbols to speed up compilation
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false
 
 [profile.ci]
-inherits = "dev"
-debug = false
+inherits        = "dev"
 overflow-checks = true
-incremental = false
+incremental     = false
+
+[profile.debugging]
+inherits = "dev"
+debug    = true
