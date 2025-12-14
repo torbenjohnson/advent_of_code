@@ -20,6 +20,7 @@
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ rust-overlay.overlays.default ];
+        config.allowUnfree = true;
       };
       rustToolchain = pkgs.rust-bin.fromRustupToolchainFile "${self}/rust-toolchain.toml";
       devRustToolchain = rustToolchain.override {
