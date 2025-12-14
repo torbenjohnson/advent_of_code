@@ -1,80 +1,73 @@
 [package]
-edition = "2024"
-name    = "advent_of_code"
+name = "advent_of_code"
 version = "0.1.0"
+edition = "2024"
+
+[[bench]]
+harness = false
+name = "day_1"
 
 [dependencies]
 displaydoc = "0.2.5"
-itertools  = "0.14.0"
-rayon      = "1.11.0"
-thiserror  = "2.0.16"
+itertools = "0.14.0"
+rayon = "1.11.0"
+thiserror = "2.0.16"
 
 [dev-dependencies]
 divan = "0.1.21"
 
-[[bench]]
-harness = false
-name    = "day_1"
-
-[profile.dev]
-debug = false  # Disable debug symbols to speed up compilation
-
-[profile.ci]
-incremental     = false
-debug           = false
-inherits        = "dev"
-overflow-checks = true
-
-#################################################################################
 # clippy lints set to warn will allow developers to compile on their local
 # development branches, but not committing on the branch.
-#
-# The "restriction" group is enabled globally as "warn" because most of the
-# lints would be used
 #
 # These lints were selected with link (Rust v1.87 and below):
 # https://rust-lang.github.io/rust-clippy/master/index.html?versions=lte%3A87&groups=complexity%2Ccorrectness%2Cperf%2Crestriction%2Cstyle%2Csuspicious%2Cdeprecated&levels=allow%2Cnone
 #
 # Thanks Jacob for the lints
 
+[lints.clippy]
+# Single lints
+alloc_instead_of_core = "allow"  # alloc is better than std
+arbitrary_source_item_ordering = "allow"  # Do not enforce an ordering
+arithmetic_side_effects = "allow"  # Do not enforce overflow considerations
+blanket_clippy_restriction_lints = "allow"  # Allow using "restriction group" with global warnings
+cargo = { level = "warn", priority = -1 }
+cargo_common_metadata = "allow"
+cfg_not_test = "allow"
+clone_on_ref_ptr = "allow"  # Cloning with "x.clone()" is ok
+default_numeric_fallback = "allow"  # Do not enforce numeric types to be named
+else_if_without_else = "allow"  # Do not enforce the write of empty "else" statement for if expressions
+exhaustive_enums = "allow"  # Some enums are truly exhaustive
+exhaustive_structs = "allow"  # Most structs are truly exhaustive
+float_arithmetic = "allow"  # Do not disallow float arithmetic
+implicit_return = "allow"  # Do not force writing the "return" keyword
+inline_asm_x86_intel_syntax = "allow"  # Enforce x86 Intel syntax assembly instead of AT&T
+integer_division_remainder_used = "allow"
+min_ident_chars = "allow"  # Allow single char variable names
+missing_docs_in_private_items = "allow"  # Do not enforce documentation on private items
+missing_inline_in_public_items = "allow"  # Allow public functions not to be inlined
+missing_trait_methods = "allow"  # Do not enforce writing default implemented functions
+module_name_repetitions = "allow"  # Do not enforce module name styling
+multiple_crate_versions = "allow"
+nursery = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+pub_use = "allow"
+pub_with_shorthand = "allow"  # Enforce not using "pub(in crate)"
+question_mark_used = "allow"  # Allow the use of the question mark operator
+restriction = { level = "warn", priority = -1 }
+self_named_module_files = "allow"  # Enforce not using "mod.rs"
+separated_literal_suffix = "allow"  # Enforce unseparated literal suffixes instead of separated
+similar_names = "allow"  # Do not enforce variable name styling
+single_call_fn = "allow"  # Separating concerns is preferred to centralizing behavior
+std_instead_of_alloc = "allow"  # alloc is better than std
+
 [lints.rust]
 # missing_docs = "warn" # Groups
 
-[lints.clippy]
-# "-1" priority forces "0" (default) priority to override these groups
-# https://doc.rust-lang.org/cargo/reference/manifest.html?highlight=priority#the-lints-section
-cargo       = { level = "warn", priority = -1 }
-nursery     = { level = "warn", priority = -1 }
-pedantic    = { level = "warn", priority = -1 }
-restriction = { level = "warn", priority = -1 }
+[profile.dev]
+debug = false  # Disable debug symbols to speed up compilation
 
-# Single lints
-alloc_instead_of_core            = "allow" # alloc is better than std
-arbitrary_source_item_ordering   = "allow" # Do not enforce an ordering
-arithmetic_side_effects          = "allow" # Do not enforce overflow considerations
-blanket_clippy_restriction_lints = "allow" # Allow using "restriction group" with global warnings
-cargo_common_metadata            = "allow"
-cfg_not_test                     = "allow"
-clone_on_ref_ptr                 = "allow" # Cloning with "x.clone()" is ok
-default_numeric_fallback         = "allow" # Do not enforce numeric types to be named
-else_if_without_else             = "allow" # Do not enforce the write of empty "else" statement for if expressions
-exhaustive_enums                 = "allow" # Some enums are truly exhaustive
-exhaustive_structs               = "allow" # Most structs are truly exhaustive
-float_arithmetic                 = "allow" # Do not disallow float arithmetic
-implicit_return                  = "allow" # Do not force writing the "return" keyword
-inline_asm_x86_intel_syntax      = "allow" # Enforce x86 Intel syntax assembly instead of AT&T
-integer_division_remainder_used  = "allow"
-min_ident_chars                  = "allow" # Allow single char variable names
-missing_docs_in_private_items    = "allow" # Do not enforce documentation on private items
-missing_inline_in_public_items   = "allow" # Allow public functions not to be inlined
-missing_trait_methods            = "allow" # Do not enforce writing default implemented functions
-module_name_repetitions          = "allow" # Do not enforce module name styling
-multiple_crate_versions          = "allow"
-pub_use                          = "allow"
-pub_with_shorthand               = "allow" # Enforce not using "pub(in crate)"
-question_mark_used               = "allow" # Allow the use of the question mark operator
-self_named_module_files          = "allow" # Enforce not using "mod.rs"
-separated_literal_suffix         = "allow" # Enforce unseparated literal suffixes instead of separated
-similar_names                    = "allow" # Do not enforce variable name styling
-single_call_fn                   = "allow" # Separating concerns is preferred to centralizing behavior
-std_instead_of_alloc             = "allow" # alloc is better than std
+[profile.ci]
+inherits = "dev"
+debug = false
+overflow-checks = true
+incremental = false
