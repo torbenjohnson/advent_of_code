@@ -22,21 +22,25 @@ run:
 
 # Format all files
 fmt:
-    cargo fmt --all  
+    cargo fmt --all
+    tombi fmt
     just --unstable --fmt
 
 # Check formatting of all files in CI
 _fmt-ci:
     cargo fmt --all -- --check
+    tombi fmt --check
     just --unstable --fmt --check
 
 # Run the linter for all files
 lint:
     cargo clippy -- --no-deps
+    tombi lint
 
 # Run the linter for all files in CI
 _lint-ci:
     RUSTFLAGS="-D warnings" cargo clippy --all-targets --all-features --profile {{ PROFILE_CI }} -- --no-deps
+    tombi lint --error-on-warnings
 
 # Run all tests
 test:
