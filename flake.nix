@@ -28,16 +28,29 @@
       };
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        nativeBuildInputs = [
-          devRustToolchain
-          pkgs.cargo-nextest
-          pkgs.just
-          pkgs.rust-analyzer
-          pkgs.tombi
-          pkgs.wild
-          pkgs.clang
-        ];
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          nativeBuildInputs = [
+            devRustToolchain
+            pkgs.rust-analyzer
+            pkgs.cargo-nextest
+            pkgs.just
+            pkgs.tombi
+            pkgs.wild
+            pkgs.clang
+          ];
+        };
+
+        ci = pkgs.mkShell {
+          nativeBuildInputs = [
+            rustToolchain
+            pkgs.cargo-nextest
+            pkgs.just
+            pkgs.tombi
+            pkgs.wild
+            pkgs.clang
+          ];
+        };
       };
     };
 }
