@@ -21,8 +21,7 @@ jobs:
       - run: rustup toolchain install
       - uses: taiki-e/install-action@v2
         with:
-          tool: just,cargo-nextest
-      - uses: davidlattimore/wild-action@0.7.0
+          tool: just,cargo-nextest,wild-linker
       - uses: tombi-toml/setup-tombi@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
