@@ -54,7 +54,7 @@ fn parse_input_to_lists(input: &str) -> (Vec<u32>, Vec<u32>) {
 mod tests {
     use super::*;
 
-    const INPUT: &str = include_str!("../../inputs/2024/day1.txt");
+    const INPUT: &str = include_str!("../../inputs/2024/day_1.txt");
 
     fn given_lists() -> (Vec<u32>, Vec<u32>) {
         let list_1: Vec<u32> = vec![3, 4, 2, 1, 3, 3];
