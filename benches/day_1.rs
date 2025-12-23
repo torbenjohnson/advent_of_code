@@ -3,7 +3,7 @@
     reason = "benchmark functions don't need to use return values"
 )]
 
-use advent_of_code::{solve_part_1, solve_part_2};
+use advent_of_code::{year_2024::solve_part_1, year_2024::solve_part_2};
 
 const INPUT: &str = include_str!("../inputs/2024/day_1.txt");
 
